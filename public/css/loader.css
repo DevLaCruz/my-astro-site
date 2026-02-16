@@ -1,0 +1,21 @@
+.loader {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: block;
+  border-top: 3px solid var(--secondary-color);
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation .7s linear infinite;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

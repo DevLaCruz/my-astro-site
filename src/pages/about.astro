@@ -1,0 +1,441 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const skillCategories = [
+    {
+        title: "AI & Machine Learning Research",
+        icon: "fa-brain",
+        skills: [
+            "World Models & Representation Learning",
+            "JEPA Architectures",
+            "Neurosymbolic AI Systems",
+            "RL Environment Design",
+            "Agentic Task Planning",
+            "Model Evaluation Frameworks",
+            "LLM Fine-tuning & Alignment",
+        ],
+    },
+    {
+        title: "ML Frameworks & Tools",
+        icon: "fa-gears",
+        skills: [
+            "PyTorch",
+            "TensorFlow",
+            "Hugging Face",
+            "Diffusion Models",
+            "GANs",
+            "Custom Training Pipelines",
+        ],
+    },
+    {
+        title: "Infrastructure & DevOps",
+        icon: "fa-server",
+        skills: [
+            "Docker",
+            "Kubernetes (AKS, OpenShift 4)",
+            "CI/CD Pipelines",
+            "Nginx",
+            "Ubuntu Server",
+            "Distributed Systems",
+            "VM Orchestration",
+        ],
+    },
+    {
+        title: "Observability & Monitoring",
+        icon: "fa-chart-line",
+        skills: [
+            "Dynatrace",
+            "Grafana",
+            "Kibana",
+            "Prometheus",
+            "Incident Management",
+            "Performance Optimization",
+        ],
+    },
+    {
+        title: "Programming Languages",
+        icon: "fa-code",
+        skills: [
+            "Python (3.10+, production)",
+            "Rust (systems)",
+            "JavaScript / TypeScript",
+            "Three.js / React / Angular",
+            "Java",
+            "PHP",
+        ],
+    },
+    {
+        title: "Databases & Storage",
+        icon: "fa-database",
+        skills: [
+            "PostgreSQL",
+            "MySQL",
+            "Oracle PL/SQL",
+            "SQL Server",
+            "ML Workload Optimization",
+        ],
+    },
+];
+
+const certifications = [
+    "Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate",
+    "Oracle Cloud Infrastructure 2023 Certified Foundations Associate",
+    "PMP PMBOK 7.0 Training",
+    "Agile Project Management with Scrum",
+    "Generative AI: LLMs Project Management & Practice",
+];
+
+const researchInterests = [
+    "Training environments for long-horizon agentic tasks",
+    "Evaluation methodologies measuring real-world capabilities",
+    "Neurosymbolic AI: learned representations + structured reasoning",
+    "Empirical approaches to AI alignment and safety",
+];
+---
+
+<BaseLayout title="About Me" activePage="about">
+    <main class="layout__content">
+        <section class="content__page content__about">
+            <!-- Header -->
+            <header class="about__header" data-animate="fade-up">
+                <h2 class="about__title">
+                    About <span class="title__color">Me</span>
+                </h2>
+            </header>
+
+            <!-- Professional Summary -->
+            <section
+                class="about__personal-info"
+                data-animate="fade-up"
+                data-delay="1"
+            >
+                <article class="personal-info__bio">
+                    <p class="personal-info__description">
+                        Research-oriented Systems Engineer with 2+ years
+                        building scalable ML infrastructure and simulation
+                        environments for agentic AI systems. Specializing in
+                        designing training environments inspired by world models
+                        and JEPA (Joint Embedding Predictive Architectures),
+                        with strong interest in neurosymbolic AI approaches for
+                        robust reasoning.
+                    </p>
+                    <p
+                        class="personal-info__description"
+                        style="margin-top: 1.5rem;"
+                    >
+                        Currently expanding expertise in reinforcement learning
+                        environment design and LLM fine-tuning through hands-on
+                        implementation. Proven track record implementing ML
+                        pipelines and building rigorous evaluations measuring
+                        genuine model capabilities beyond standard benchmarks.
+                    </p>
+                    <p
+                        class="personal-info__description"
+                        style="margin-top: 1.5rem;"
+                    >
+                        Demonstrated high agency by leading NASA-nominated AI
+                        project from concept to global recognition. Deep
+                        technical experience across distributed systems,
+                        containerization (Docker, Kubernetes), and production ML
+                        operations, balancing research exploration with
+                        engineering rigor.
+                    </p>
+                </article>
+
+                <div class="personal-info__data">
+                    <ul class="personal-info__list">
+                        <li class="personal-info__option">
+                            <span class="personal-info__title">Location</span>
+                            <span class="personal-info__value"
+                                >Chiclayo, Peru</span
+                            >
+                        </li>
+                        <li class="personal-info__option">
+                            <span class="personal-info__title">Email</span>
+                            <span class="personal-info__value"
+                                >alejantony.22@hotmail.com</span
+                            >
+                        </li>
+                        <li class="personal-info__option">
+                            <span class="personal-info__title">Phone</span>
+                            <span class="personal-info__value"
+                                >+51 930 116 108</span
+                            >
+                        </li>
+                        <li class="personal-info__option">
+                            <span class="personal-info__title">Degree</span>
+                            <span class="personal-info__value"
+                                >B.Sc. Systems Engineering</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Technical Skills -->
+            <section class="about__services">
+                <header class="services__header" data-animate="fade-up">
+                    <h3 class="services__title">
+                        Technical <span class="title__color">Skills</span>
+                    </h3>
+                </header>
+
+                <div class="services__container">
+                    {
+                        skillCategories.map((cat, i) => (
+                            <article
+                                class="services__service skill-card pulse-glow"
+                                data-animate="fade-up"
+                                data-delay={String((i % 4) + 1)}
+                            >
+                                <div class="service__icon">
+                                    <i
+                                        class={`service__real-icon fa-solid ${cat.icon}`}
+                                    />
+                                </div>
+                                <div class="service__content">
+                                    <h4 class="service__title">{cat.title}</h4>
+                                    <div
+                                        class="resume__knowledges"
+                                        style="margin-top: 1rem;"
+                                    >
+                                        <ul class="knowledges__list">
+                                            {cat.skills.map((skill) => (
+                                                <li class="knowledges__option tag-hover">
+                                                    {skill}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- Research Interests -->
+            <section class="about__services" data-animate="fade-up">
+                <header class="services__header">
+                    <h3 class="services__title">
+                        Research <span class="title__color">Interests</span>
+                    </h3>
+                </header>
+                <div class="research-interests">
+                    {
+                        researchInterests.map((interest, i) => (
+                            <div
+                                class="research-item"
+                                data-animate="fade-left"
+                                data-delay={String(i + 1)}
+                            >
+                                <i class="fa-solid fa-flask research-item__icon" />
+                                <p class="research-item__text">{interest}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section class="about__services" data-animate="fade-up">
+                <header class="services__header">
+                    <h3 class="services__title">Education</h3>
+                </header>
+                <div class="education-card pulse-glow" data-animate="scale-in">
+                    <div class="education-card__icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div class="education-card__content">
+                        <h4 class="education-card__title">
+                            Bachelor of Science in Systems Engineering
+                        </h4>
+                        <span class="education-card__school"
+                            >Universidad Nacional Pedro Ruiz Gallo, Lambayeque,
+                            Peru</span
+                        >
+                        <span class="education-card__date"
+                            >October 2019 – September 2024</span
+                        >
+                        <p class="education-card__courses">
+                            <strong>Relevant Coursework:</strong> Machine Learning,
+                            Distributed Systems, Computer Networks, Algorithms & Data
+                            Structures, Database Systems
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certifications -->
+            <section class="about__services" data-animate="fade-up">
+                <header class="services__header">
+                    <h3 class="services__title">Certifications</h3>
+                </header>
+                <div class="certifications-grid">
+                    {
+                        certifications.map((cert, i) => (
+                            <div
+                                class="cert-item pulse-glow"
+                                data-animate="fade-up"
+                                data-delay={String((i % 4) + 1)}
+                            >
+                                <i class="fa-solid fa-certificate cert-item__icon" />
+                                <span class="cert-item__text">{cert}</span>
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+        </section>
+    </main>
+</BaseLayout>
+
+<style>
+    .skill-card {
+        border: 1.5px solid #e5e6e7;
+        border-radius: 1.2rem;
+        padding: 2.5rem;
+        background: #fff;
+    }
+
+    /* Research Interests */
+    .research-interests {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .research-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.8rem 2rem;
+        border-left: 3px solid var(--secondary-color);
+        background: linear-gradient(
+            135deg,
+            rgba(0, 121, 208, 0.03) 0%,
+            transparent 100%
+        );
+        border-radius: 0 1rem 1rem 0;
+        transition: all 0.3s ease;
+    }
+
+    .research-item:hover {
+        transform: translateX(8px);
+        background: linear-gradient(
+            135deg,
+            rgba(0, 121, 208, 0.07) 0%,
+            transparent 100%
+        );
+    }
+
+    .research-item__icon {
+        color: var(--secondary-color);
+        font-size: 2rem;
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+    }
+
+    .research-item__text {
+        font-size: 1.5rem;
+        line-height: 2.4rem;
+        color: var(--color-text);
+    }
+
+    /* Education */
+    .education-card {
+        display: flex;
+        gap: 2rem;
+        padding: 3rem;
+        border: 1.5px solid #e5e6e7;
+        border-radius: 1.2rem;
+        background: #fff;
+        width: 100%;
+    }
+
+    .education-card__icon {
+        flex-shrink: 0;
+        width: 6rem;
+        height: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 121, 208, 0.1);
+        border-radius: 1rem;
+        color: var(--secondary-color);
+        font-size: 2.8rem;
+    }
+
+    .education-card__content {
+        flex: 1;
+    }
+
+    .education-card__title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-title);
+    }
+
+    .education-card__school {
+        display: block;
+        font-size: 1.4rem;
+        color: var(--secondary-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .education-card__date {
+        display: block;
+        font-size: 1.3rem;
+        color: var(--color-subtitle);
+        margin-bottom: 1rem;
+    }
+
+    .education-card__courses {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+        color: var(--color-text);
+    }
+
+    /* Certifications */
+    .certifications-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .cert-item {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1.5rem 2rem;
+        border: 1.5px solid #e5e6e7;
+        border-radius: 0.8rem;
+        background: #fff;
+        transition: all 0.3s ease;
+    }
+
+    .cert-item:hover {
+        border-color: var(--secondary-color);
+    }
+
+    .cert-item__icon {
+        color: var(--secondary-color);
+        font-size: 2rem;
+        flex-shrink: 0;
+    }
+
+    .cert-item__text {
+        font-size: 1.4rem;
+        color: var(--color-text);
+    }
+
+    @media (max-width: 585px) {
+        .education-card {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+</style>

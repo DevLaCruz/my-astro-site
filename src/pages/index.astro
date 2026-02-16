@@ -1,0 +1,231 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Systems & ML Engineer" activePage="home">
+	<main class="layout__content">
+		<section class="content__page hero-page">
+			<div class="hero__content page-enter">
+				<div class="hero__badge" data-animate="scale-in">
+					<i class="fa-solid fa-microchip"></i>
+					<span>Research-Oriented Engineer</span>
+				</div>
+				<h1 class="page__name" data-animate="fade-up">
+					Alejandro De La Cruz
+				</h1>
+				<div
+					class="typing-wrapper"
+					data-animate="fade-in"
+					data-delay="2"
+				>
+					<h2 class="page__job typing-text">
+						Systems & ML Engineer — Building Agentic AI
+					</h2>
+				</div>
+				<p class="hero__summary" data-animate="fade-up" data-delay="3">
+					2+ years building scalable ML infrastructure and simulation
+					environments for agentic AI systems. Specializing in
+					training environments inspired by world models and JEPA
+					architectures.
+				</p>
+				<div
+					class="hero__actions"
+					data-animate="fade-up"
+					data-delay="4"
+				>
+					<a
+						href="/about"
+						class="hero__btn hero__btn--primary pulse-glow"
+					>
+						<i class="fa-solid fa-user"></i> About Me
+					</a>
+					<a
+						href="/experience"
+						class="hero__btn hero__btn--outline pulse-glow"
+					>
+						<i class="fa-solid fa-briefcase"></i> View Experience
+					</a>
+				</div>
+
+				<div
+					class="hero__highlights"
+					data-animate="fade-up"
+					data-delay="5"
+				>
+					<div class="highlight__item">
+						<i class="fa-solid fa-trophy highlight__icon"></i>
+						<span class="highlight__text">NASA Global Nominee</span>
+					</div>
+					<div class="highlight__item">
+						<i class="fa-solid fa-building highlight__icon"></i>
+						<span class="highlight__text">NTT DATA</span>
+					</div>
+					<div class="highlight__item">
+						<i class="fa-solid fa-certificate highlight__icon"></i>
+						<span class="highlight__text">Oracle AI Certified</span>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</BaseLayout>
+
+<style>
+	.hero-page {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hero-page::before {
+		content: "";
+		position: absolute;
+		top: -50%;
+		right: -30%;
+		width: 80rem;
+		height: 80rem;
+		border-radius: 50%;
+		background: radial-gradient(
+			circle,
+			rgba(0, 121, 208, 0.06) 0%,
+			transparent 70%
+		);
+		animation: float 8s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	.hero-page::after {
+		content: "";
+		position: absolute;
+		bottom: -40%;
+		left: -20%;
+		width: 60rem;
+		height: 60rem;
+		border-radius: 50%;
+		background: radial-gradient(
+			circle,
+			rgba(0, 121, 208, 0.04) 0%,
+			transparent 70%
+		);
+		animation: float 10s ease-in-out infinite reverse;
+		pointer-events: none;
+	}
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg);
+		}
+		50% {
+			transform: translateY(-30px) rotate(3deg);
+		}
+	}
+
+	.hero__content {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		max-width: 60rem;
+		padding: 2rem;
+	}
+
+	.hero__badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.8rem;
+		padding: 0.6rem 1.8rem;
+		border-radius: 5rem;
+		background-color: rgba(0, 121, 208, 0.08);
+		color: var(--secondary-color);
+		font-size: 1.3rem;
+		font-weight: 500;
+		margin-bottom: 2.5rem;
+		border: 1px solid rgba(0, 121, 208, 0.15);
+	}
+
+	.hero__badge i {
+		font-size: 1.4rem;
+	}
+
+	.hero__summary {
+		font-size: 1.5rem;
+		line-height: 2.6rem;
+		color: var(--color-text);
+		max-width: 50rem;
+		margin: 2.5rem auto;
+	}
+
+	.hero__actions {
+		display: flex;
+		gap: 1.5rem;
+		justify-content: center;
+		margin-top: 3rem;
+		flex-wrap: wrap;
+	}
+
+	.hero__btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.8rem;
+		padding: 1.2rem 3rem;
+		border-radius: 5rem;
+		font-size: 1.5rem;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		cursor: pointer;
+	}
+
+	.hero__btn--primary {
+		background-color: var(--secondary-color);
+		color: #fff;
+		box-shadow: 0 8px 24px rgba(0, 121, 208, 0.3);
+	}
+
+	.hero__btn--primary:hover {
+		background-color: #005a9e;
+		transform: translateY(-3px);
+		box-shadow: 0 12px 32px rgba(0, 121, 208, 0.4);
+	}
+
+	.hero__btn--outline {
+		border: 2px solid var(--secondary-color);
+		color: var(--secondary-color);
+		background-color: transparent;
+	}
+
+	.hero__btn--outline:hover {
+		background-color: var(--secondary-color);
+		color: #fff;
+		transform: translateY(-3px);
+	}
+
+	.hero__highlights {
+		display: flex;
+		justify-content: center;
+		gap: 3rem;
+		margin-top: 4rem;
+		flex-wrap: wrap;
+	}
+
+	.highlight__item {
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+		font-size: 1.3rem;
+		color: var(--color-subtitle);
+		transition: all 0.3s ease;
+	}
+
+	.highlight__item:hover {
+		color: var(--secondary-color);
+	}
+
+	.highlight__icon {
+		color: var(--secondary-color);
+		font-size: 1.6rem;
+		opacity: 0.8;
+	}
+
+	.highlight__item:hover .highlight__icon {
+		opacity: 1;
+	}
+</style>

@@ -1,0 +1,288 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Contact" activePage="contact">
+    <main class="layout__content">
+        <section class="content__page content__contact">
+            <!-- Header -->
+            <header class="contact__header" data-animate="fade-up">
+                <h2 class="contact__title">
+                    Get in <span class="title__color">Touch</span>
+                </h2>
+            </header>
+
+            <div class="contact__container">
+                <!-- Contact Info -->
+                <section class="contact__info">
+                    <div
+                        class="contact__data pulse-glow"
+                        data-animate="fade-up"
+                        data-delay="1"
+                    >
+                        <i class="contact__icon fa-solid fa-location-dot"></i>
+                        <h2 class="contact__subtitle">Chiclayo, Lambayeque</h2>
+                        <span class="contact__detail">Peru</span>
+                    </div>
+                    <div
+                        class="contact__data pulse-glow"
+                        data-animate="fade-up"
+                        data-delay="2"
+                    >
+                        <i class="contact__icon fa-solid fa-phone"></i>
+                        <h2 class="contact__subtitle">+51 930 116 108</h2>
+                    </div>
+                    <div
+                        class="contact__data pulse-glow"
+                        data-animate="fade-up"
+                        data-delay="3"
+                    >
+                        <i class="contact__icon fa-solid fa-envelope"></i>
+                        <h2 class="contact__subtitle">
+                            alejantony.22@hotmail.com
+                        </h2>
+                    </div>
+                    <div
+                        class="contact__data pulse-glow"
+                        data-animate="fade-up"
+                        data-delay="4"
+                    >
+                        <i class="contact__icon fa-solid fa-circle-check"></i>
+                        <h2 class="contact__subtitle">Systems & ML Engineer</h2>
+                    </div>
+                </section>
+
+                <!-- Connect Section -->
+                <section class="contact__form-box">
+                    <header class="contact__form-header" data-animate="fade-up">
+                        <h3 class="form-header__title">
+                            Let's <span class="title__color">Connect</span>
+                        </h3>
+                    </header>
+
+                    <p
+                        class="connect__text"
+                        data-animate="fade-up"
+                        data-delay="1"
+                    >
+                        I'm open to discussing ML research collaborations,
+                        infrastructure engineering opportunities, and innovative
+                        projects in agentic AI systems. Whether you're working
+                        on cutting-edge research or need production-grade ML
+                        infrastructure, let's talk.
+                    </p>
+
+                    <!-- Social & Professional Links -->
+                    <div
+                        class="connect__links"
+                        data-animate="fade-up"
+                        data-delay="2"
+                    >
+                        <a
+                            href="https://www.linkedin.com/in/alejandro-de-la-cruz/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="connect__link pulse-glow"
+                        >
+                            <div class="connect__link-icon">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </div>
+                            <div class="connect__link-content">
+                                <h4 class="connect__link-title">LinkedIn</h4>
+                                <span class="connect__link-desc"
+                                    >Professional network</span
+                                >
+                            </div>
+                            <i
+                                class="fa-solid fa-arrow-up-right-from-square connect__link-arrow"
+                            ></i>
+                        </a>
+                        <a
+                            href="https://github.com/alejandrodelacruzmora"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="connect__link pulse-glow"
+                        >
+                            <div class="connect__link-icon">
+                                <i class="fa-brands fa-github"></i>
+                            </div>
+                            <div class="connect__link-content">
+                                <h4 class="connect__link-title">GitHub</h4>
+                                <span class="connect__link-desc"
+                                    >Open source & projects</span
+                                >
+                            </div>
+                            <i
+                                class="fa-solid fa-arrow-up-right-from-square connect__link-arrow"
+                            ></i>
+                        </a>
+                        <a
+                            href="mailto:alejantony.22@hotmail.com"
+                            class="connect__link pulse-glow"
+                        >
+                            <div class="connect__link-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="connect__link-content">
+                                <h4 class="connect__link-title">Email</h4>
+                                <span class="connect__link-desc"
+                                    >Direct contact</span
+                                >
+                            </div>
+                            <i
+                                class="fa-solid fa-arrow-up-right-from-square connect__link-arrow"
+                            ></i>
+                        </a>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div
+                        class="connect__additional"
+                        data-animate="fade-up"
+                        data-delay="3"
+                    >
+                        <div class="additional__item">
+                            <i class="fa-solid fa-language additional__icon"
+                            ></i>
+                            <div>
+                                <strong>Languages:</strong> Spanish (native), English
+                                (professional working proficiency)
+                            </div>
+                        </div>
+                        <div class="additional__item">
+                            <i class="fa-solid fa-users additional__icon"></i>
+                            <div>
+                                <strong>Style:</strong> Active pair programmer, remote-first
+                                team environments, cross-functional collaboration
+                            </div>
+                        </div>
+                        <div class="additional__item">
+                            <i class="fa-solid fa-passport additional__icon"
+                            ></i>
+                            <div>
+                                <strong>Work Authorization:</strong> Open to visa
+                                sponsorship for US positions
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+</BaseLayout>
+
+<style>
+    .contact__data {
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .contact__data:hover {
+        border-color: var(--secondary-color);
+    }
+
+    .contact__detail {
+        display: block;
+        font-size: 1.3rem;
+        color: var(--color-subtitle);
+        margin-top: 0.3rem;
+    }
+
+    .connect__text {
+        font-size: 1.5rem;
+        line-height: 2.6rem;
+        color: var(--color-text);
+        margin-bottom: 3rem;
+    }
+
+    .connect__links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 3rem;
+    }
+
+    .connect__link {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem;
+        border: 1.5px solid #e5e6e7;
+        border-radius: 1rem;
+        background: #fff;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .connect__link:hover {
+        border-color: var(--secondary-color);
+        transform: translateX(5px);
+    }
+
+    .connect__link-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 121, 208, 0.1);
+        border-radius: 1rem;
+        color: var(--secondary-color);
+        font-size: 2rem;
+        flex-shrink: 0;
+    }
+
+    .connect__link-content {
+        flex: 1;
+    }
+
+    .connect__link-title {
+        font-size: 1.6rem;
+        color: var(--color-title);
+        margin-bottom: 0.2rem;
+    }
+
+    .connect__link-desc {
+        font-size: 1.3rem;
+        color: var(--color-subtitle);
+    }
+
+    .connect__link-arrow {
+        color: var(--color-subtitle);
+        font-size: 1.4rem;
+        transition: all 0.3s ease;
+    }
+
+    .connect__link:hover .connect__link-arrow {
+        color: var(--secondary-color);
+        transform: translate(3px, -3px);
+    }
+
+    .connect__additional {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .additional__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.2rem;
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+        color: var(--color-text);
+    }
+
+    .additional__icon {
+        color: var(--secondary-color);
+        font-size: 1.8rem;
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 585px) {
+        .connect__link {
+            flex-wrap: wrap;
+        }
+    }
+</style>

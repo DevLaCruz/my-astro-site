@@ -1,0 +1,269 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const experiences = [
+    {
+        years: "Oct 2025",
+        company: "MAWJAC AI",
+        title: "Lead Research Engineer & Infrastructure Lead",
+        subtitle: "NASA Space Apps Challenge — Global Nominee",
+        bullets: [
+            "Designed and implemented novel training environment for ML models to classify exoplanets using NASA astronomical datasets (3,000+ confirmed exoplanets)",
+            "Built rigorous evaluation framework measuring genuine model capability in ambiguous scenarios, going beyond standard accuracy metrics",
+            "Architected procedural world generation engine where physical variables deterministically define environment geometry, inspired by world model architectures",
+            "Owned end-to-end infrastructure: containerized ML pipeline with Docker, achieved sub-200ms inference latency despite complex 3D rendering",
+            "Selected as NASA Space Apps Global Nominee from 60,000+ participants",
+        ],
+    },
+    {
+        years: "Jul 2024 – Present",
+        company: "NTT DATA",
+        title: "Systems Engineer – RPA Operations & Infrastructure",
+        subtitle: "Remote",
+        bullets: [
+            "Manage production infrastructure for international banking clients (Banco Pichincha Ecuador, BCP), reducing incident response time by 40%",
+            "Operate distributed systems across OpenShift 4 and Azure Kubernetes Service, debugging complex microservice interactions using Dynatrace, Grafana, Kibana",
+            "Built automated incident detection pipelines querying Oracle PL/SQL and SQL Server, reducing MTTR from hours to minutes",
+            "Developed RPA automations for project management across Global Delivery Network Spain using Power Platform",
+            "Architected RPA system for critical incident notification for Alicorp (Peru's largest consumer goods supply chain)",
+            "Lead war room coordination and technical training for global teams",
+        ],
+    },
+    {
+        years: "Oct 2023 – Present",
+        company: "Freelance",
+        title: "Independent ML Engineer & Technical Consultant",
+        subtitle: "Remote",
+        bullets: [
+            "Delivered 6 end-to-end AI/ML and software solutions across e-commerce, healthcare, and finance",
+            "Implemented LLM-powered automation systems and generative AI applications with production reliability",
+            "Built scalable ML infrastructure using Docker Compose, React/Vue.js, Django, PostgreSQL, Nginx on Ubuntu Server",
+        ],
+    },
+    {
+        years: "Jan 2024 – Apr 2024",
+        company: "Universidad Nacional Pedro Ruiz Gallo",
+        title: "Full-Stack Software Engineer",
+        subtitle: "Hybrid",
+        bullets: [
+            "Developed legal document management system using Laravel and Vue.js, improving administrative efficiency by 60%",
+            "Architected RESTful API services balancing engineering rigor with rapid feature delivery",
+        ],
+    },
+    {
+        years: "May 2023 – Aug 2023",
+        company: "Grupo Consigueventas Inversiones",
+        title: "Backend Software Engineer",
+        subtitle: "Remote",
+        bullets: [
+            "Built attendance management system using TDD, achieving 85%+ code coverage",
+            "Architected RESTful API services and database schema for Laravel-based system",
+            "Mentored junior developers and established code review practices",
+        ],
+    },
+    {
+        years: "May 2023 – Oct 2024",
+        company: "UNPRG – Nursing Faculty",
+        title: "Volunteer Software Engineer",
+        subtitle: "Volunteer",
+        bullets: [
+            "Owned end-to-end development of thesis project management system over 17-month period",
+            "Designed complete system architecture with comprehensive documentation and user manuals",
+        ],
+    },
+];
+
+const research = [
+    {
+        title: "RL Environment Design",
+        description:
+            "Implementing custom Gymnasium-compatible environments for long-horizon tasks, studying reward shaping and PPO/SAC algorithms.",
+        icon: "fa-gamepad",
+    },
+    {
+        title: "LLM Fine-tuning & Evaluation",
+        description:
+            "Learning LoRA, QLoRA techniques and implementing custom evaluation frameworks. Studying RLHF and alignment research.",
+        icon: "fa-sliders",
+    },
+    {
+        title: "World Models & JEPA",
+        description:
+            "Deep-diving into JEPA architectures and connections between neurosymbolic approaches and learned world models.",
+        icon: "fa-globe",
+    },
+    {
+        title: "ML Research Methodology",
+        description:
+            "Following Anthropic's research output to design rigorous experiments measuring genuine capabilities.",
+        icon: "fa-flask-vial",
+    },
+];
+---
+
+<BaseLayout title="Experience" activePage="experience">
+    <main class="layout__content">
+        <section class="content__page content__resume">
+            <!-- Header -->
+            <header class="resume__header" data-animate="fade-up">
+                <h2 class="resume__title">Experience</h2>
+            </header>
+
+            <!-- Work Experience Timeline -->
+            <div class="resume__container">
+                <section class="resume__left" style="flex-basis: 100%;">
+                    <div class="resume__timeline">
+                        <header
+                            class="resume__subheader"
+                            data-animate="fade-up"
+                        >
+                            <h2 class="resume__subtitle">
+                                Professional <span class="title__color"
+                                    >Experience</span>
+                            </h2>
+                        </header>
+
+                        {
+                            experiences.map((exp, i) => (
+                                <article
+                                    class="timelines__timeline timeline-dot-pulse"
+                                    data-animate="fade-up"
+                                    data-delay={String((i % 4) + 1)}
+                                >
+                                    <header class="timeline__header">
+                                        <h3 class="timeline__year">
+                                            {exp.years}
+                                        </h3>
+                                        <span class="timeline__company">
+                                            {exp.company}
+                                        </span>
+                                    </header>
+                                    <div class="timeline__divider" />
+                                    <div class="timeline__description">
+                                        <h3 class="timeline__title">
+                                            {exp.title}
+                                        </h3>
+                                        <span class="exp-subtitle">
+                                            {exp.subtitle}
+                                        </span>
+                                        <ul class="exp-bullets">
+                                            {exp.bullets.map((bullet) => (
+                                                <li class="exp-bullet">
+                                                    {bullet}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </article>
+                            ))
+                        }
+                    </div>
+                </section>
+            </div>
+
+            <!-- Current Research -->
+            <section class="about__services" style="margin-top: 2rem;">
+                <header class="services__header" data-animate="fade-up">
+                    <h3 class="services__title">
+                        Current Research & <span class="title__color"
+                            >Active Learning</span>
+                    </h3>
+                </header>
+                <div class="services__container">
+                    {
+                        research.map((item, i) => (
+                            <article
+                                class="services__service research-card pulse-glow"
+                                data-animate="fade-up"
+                                data-delay={String(i + 1)}
+                            >
+                                <div class="service__icon">
+                                    <i
+                                        class={`service__real-icon fa-solid ${item.icon}`}
+                                    />
+                                </div>
+                                <div class="service__content">
+                                    <h4 class="service__title">{item.title}</h4>
+                                    <p class="service__description">
+                                        {item.description}
+                                    </p>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </section>
+        </section>
+    </main>
+</BaseLayout>
+
+<style>
+    .exp-subtitle {
+        display: inline-block;
+        font-size: 1.2rem;
+        color: var(--secondary-color);
+        background: rgba(0, 121, 208, 0.08);
+        padding: 0.2rem 0.8rem;
+        border-radius: 0.3rem;
+        margin-bottom: 0.8rem;
+        font-weight: 500;
+    }
+
+    .exp-bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .exp-bullet {
+        position: relative;
+        font-size: 1.35rem;
+        line-height: 2.2rem;
+        color: var(--color-text);
+        padding-left: 1.8rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .exp-bullet::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--secondary-color);
+        font-weight: bold;
+    }
+
+    .research-card {
+        border: 1.5px solid #e5e6e7;
+        border-radius: 1.2rem;
+        padding: 2.5rem;
+        background: #fff;
+    }
+
+    .service__description {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+        color: var(--color-text);
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 585px) {
+        .timelines__timeline {
+            flex-direction: column;
+        }
+
+        .timeline__header {
+            text-align: left;
+            padding-right: 0;
+            margin-bottom: 1rem;
+        }
+
+        .timeline__divider {
+            display: none;
+        }
+
+        .timeline__description {
+            width: 100%;
+            padding-left: 0;
+        }
+    }
+</style>
