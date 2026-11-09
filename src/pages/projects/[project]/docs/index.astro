@@ -1,0 +1,33 @@
+---
+/**
+ * /projects/[project]/docs/ → redirects to the first doc page.
+ */
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects', ({ data }) => data.hasDocs);
+  const paths = [];
+
+  for (const project of allProjects) {
+    const projectDocs = await getCollection(
+      'docs',
+      ({ id }) => id.startsWith(`${project.id}/`),
+    );
+    const sorted = projectDocs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+    if (sorted.length > 0) {
+      const firstDoc = sorted[0];
+      const pageSlug = firstDoc.id.slice(project.id.length + 1);
+      paths.push({
+        params: { project: project.id },
+        props: { redirectUrl: `/projects/${project.id}/docs/${pageSlug}/` },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { redirectUrl } = Astro.props;
+return Astro.redirect(redirectUrl, 301);
+---

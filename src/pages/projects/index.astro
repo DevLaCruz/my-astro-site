@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+---
+
+<BaseLayout title="Open Source Projects" activePage="projects">
+  <main class="layout__content">
+    <section class="content__page content__portfolio">
+      <header class="portfolio__header" data-animate="fade-up">
+        <h2 class="portfolio__title">
+          Open Source <span class="title__color">Projects</span>
+        </h2>
+        <p class="projects-lead" data-animate="fade-up" data-delay="1">
+          Libraries and tools built to solve real problems.
+        </p>
+      </header>
+
+      {projects.length === 0 ? (
+        <p class="projects-empty" data-animate="fade-up" data-delay="2">
+          No projects yet — check back soon.
+        </p>
+      ) : (
+        <div class="projects-grid">
+          {projects.map((project, i) => (
+            <ProjectCard project={project} index={i} />
+          ))}
+        </div>
+      )}
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .projects-lead {
+    font-size: 1.5rem;
+    color: var(--color-subtitle);
+    margin-top: 1rem;
+    max-width: 44rem;
+    line-height: 1.7;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+    gap: 2rem;
+    margin-top: 3.5rem;
+    width: 100%;
+    align-items: start;
+  }
+
+  .projects-empty {
+    font-size: 1.5rem;
+    color: var(--color-subtitle);
+    margin-top: 3rem;
+  }
+</style>

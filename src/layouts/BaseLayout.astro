@@ -83,10 +83,19 @@ const { title, activePage = "" } = Astro.props;
                                     class={`menu__link ${activePage === "experience" ? "menu__link--active" : ""}`}
                                     href="/experience"
                                 >
-                                    <i class="menu__icon fa-solid fa-briefcase"
-                                    ></i>
-                                    <span class="menu__overlay">Experience</span
-                                    >
+                                    <i class="menu__icon fa-solid fa-briefcase"></i>
+                                    <span class="menu__overlay">
+                                        Experience
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu__option">
+                                <a
+                                    class={`menu__link ${activePage === "projects" ? "menu__link--active" : ""}`}
+                                    href="/projects"
+                                >
+                                    <i class="menu__icon fa-solid fa-code-branch"></i>
+                                    <span class="menu__overlay">Projects</span>
                                 </a>
                             </li>
                             <li class="menu__option">
@@ -94,8 +103,7 @@ const { title, activePage = "" } = Astro.props;
                                     class={`menu__link ${activePage === "contact" ? "menu__link--active" : ""}`}
                                     href="/contact"
                                 >
-                                    <i class="menu__icon fa-solid fa-envelope"
-                                    ></i>
+                                    <i class="menu__icon fa-solid fa-envelope"></i>
                                     <span class="menu__overlay">Contact</span>
                                 </a>
                             </li>
@@ -113,9 +121,7 @@ const { title, activePage = "" } = Astro.props;
                                     rel="noopener noreferrer"
                                     aria-label="LinkedIn"
                                 >
-                                    <i
-                                        class="social__icon fa-brands fa-linkedin"
-                                    ></i>
+                                    <i class="social__icon fa-brands fa-linkedin"></i>
                                 </a>
                             </li>
                             <li class="social__option">
@@ -126,8 +132,7 @@ const { title, activePage = "" } = Astro.props;
                                     rel="noopener noreferrer"
                                     aria-label="GitHub"
                                 >
-                                    <i class="social__icon fa-brands fa-github"
-                                    ></i>
+                                    <i class="social__icon fa-brands fa-github"></i>
                                 </a>
                             </li>
                         </ul>
@@ -142,7 +147,9 @@ const { title, activePage = "" } = Astro.props;
                         >
                             <i
                                 class="fa-solid fa-download"
-                                style="margin-right: 0.5rem;"></i>Download CV
+                                style="margin-right: 0.5rem;"
+                            ></i>
+                            Download CV
                         </a>
                     </div>
 

@@ -1,0 +1,226 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const { name, tagline, status, tech, github, pypi, npm, hasDocs, featured } = project.data;
+const id = project.id;
+
+const statusConfig = {
+  active:       { label: 'Active',       color: '#22c55e' },
+  stable:       { label: 'Stable',       color: '#0079d0' },
+  experimental: { label: 'Experimental', color: '#f59e0b' },
+  archived:     { label: 'Archived',     color: '#6b7280' },
+} as const;
+
+const s = statusConfig[status];
+---
+
+<article
+  class:list={['project-card', 'pulse-glow', { 'project-card--featured': featured }]}
+  data-animate="fade-up"
+  data-delay={String((index % 3) + 1)}
+>
+  <header class="project-card__header">
+    <div class="project-card__top">
+      <span
+        class="project-card__status"
+        style={`background:${s.color}1a;color:${s.color};border:1px solid ${s.color}40`}
+      >
+        {s.label}
+      </span>
+      {featured && (
+        <span class="project-card__featured">
+          <i class="fa-solid fa-star"></i> Featured
+        </span>
+      )}
+    </div>
+    <h3 class="project-card__name">{name}</h3>
+    <p class="project-card__tagline">{tagline}</p>
+  </header>
+
+  <div class="project-card__tech">
+    {tech.slice(0, 4).map((t) => (
+      <span class="project-card__tag">{t}</span>
+    ))}
+    {tech.length > 4 && (
+      <span class="project-card__tag project-card__tag--more">+{tech.length - 4}</span>
+    )}
+  </div>
+
+  <footer class="project-card__footer">
+    <a href={`/projects/${id}/`} class="project-card__btn project-card__btn--primary">
+      <i class="fa-solid fa-eye"></i>
+      <span>View</span>
+    </a>
+    {hasDocs && (
+      <a href={`/projects/${id}/docs/`} class="project-card__btn project-card__btn--outline">
+        <i class="fa-solid fa-book"></i>
+        <span>Docs</span>
+      </a>
+    )}
+    {github && (
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-card__btn project-card__btn--ghost"
+        aria-label="GitHub"
+      >
+        <i class="fa-brands fa-github"></i>
+      </a>
+    )}
+    {pypi && (
+      <a
+        href={pypi}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-card__btn project-card__btn--ghost"
+        aria-label="PyPI"
+      >
+        <i class="fa-brands fa-python"></i>
+      </a>
+    )}
+    {npm && (
+      <a
+        href={npm}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-card__btn project-card__btn--ghost"
+        aria-label="npm"
+      >
+        <i class="fa-brands fa-npm"></i>
+      </a>
+    )}
+  </footer>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    padding: 2.5rem;
+    border: 1.5px solid #e5e6e7;
+    border-radius: 1.2rem;
+    background: #fff;
+  }
+
+  .project-card--featured {
+    border-color: rgba(0, 121, 208, 0.25);
+    background: linear-gradient(160deg, rgba(0, 121, 208, 0.025) 0%, #fff 60%);
+  }
+
+  .project-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .project-card__top {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .project-card__status {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.25rem 0.8rem;
+    border-radius: 2rem;
+    letter-spacing: 0.03em;
+  }
+
+  .project-card__featured {
+    font-size: 1.15rem;
+    color: #f59e0b;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .project-card__name {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--color-title);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .project-card__tagline {
+    font-size: 1.4rem;
+    color: var(--color-subtitle);
+    line-height: 1.55;
+  }
+
+  .project-card__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .project-card__tag {
+    font-size: 1.1rem;
+    padding: 0.2rem 0.75rem;
+    border-radius: 0.4rem;
+    background: rgba(0, 121, 208, 0.06);
+    color: var(--secondary-color);
+    border: 1px solid rgba(0, 121, 208, 0.15);
+  }
+
+  .project-card__tag--more {
+    background: #f3f4f6;
+    color: #6b7280;
+    border-color: #e5e7eb;
+  }
+
+  .project-card__footer {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .project-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.6rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .project-card__btn--primary {
+    background: var(--secondary-color);
+    color: #fff;
+  }
+  .project-card__btn--primary:hover {
+    background: #005a9e;
+    transform: translateY(-1px);
+  }
+
+  .project-card__btn--outline {
+    border: 1.5px solid var(--secondary-color);
+    color: var(--secondary-color);
+  }
+  .project-card__btn--outline:hover {
+    background: var(--secondary-color);
+    color: #fff;
+  }
+
+  .project-card__btn--ghost {
+    color: var(--color-subtitle);
+    padding: 0.65rem 1rem;
+  }
+  .project-card__btn--ghost:hover {
+    color: var(--secondary-color);
+  }
+</style>

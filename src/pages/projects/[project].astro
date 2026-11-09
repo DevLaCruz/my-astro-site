@@ -1,0 +1,352 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getDocUrl } from '../../lib/docs';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { project: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { name, tagline, status, tech, github, pypi, npm, hasDocs, featured } = project.data;
+const projectId = project.id;
+
+// Docs for this project (for the quick-access grid at the bottom)
+const allDocs = hasDocs
+  ? await getCollection('docs', ({ id }) => id.startsWith(`${projectId}/`))
+  : [];
+const projectDocs = allDocs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const firstDoc = projectDocs[0];
+
+const statusConfig = {
+  active:       { label: 'Active',       color: '#22c55e' },
+  stable:       { label: 'Stable',       color: '#0079d0' },
+  experimental: { label: 'Experimental', color: '#f59e0b' },
+  archived:     { label: 'Archived',     color: '#6b7280' },
+} as const;
+const s = statusConfig[status];
+---
+
+<BaseLayout title={name} activePage="projects">
+  <main class="layout__content">
+    <article class="content__page project-detail">
+
+      <!-- Breadcrumb -->
+      <nav class="project-detail__breadcrumb" data-animate="fade-up">
+        <a href="/projects/" class="breadcrumb__back">
+          <i class="fa-solid fa-arrow-left"></i>
+          All Projects
+        </a>
+      </nav>
+
+      <!-- Header -->
+      <header class="project-detail__header" data-animate="fade-up" data-delay="1">
+        <div class="project-detail__meta">
+          <span
+            class="project-badge"
+            style={`background:${s.color}1a;color:${s.color};border:1px solid ${s.color}40`}
+          >
+            {s.label}
+          </span>
+          {featured && (
+            <span class="project-featured">
+              <i class="fa-solid fa-star"></i> Featured
+            </span>
+          )}
+        </div>
+        <h1 class="project-detail__name">{name}</h1>
+        <p class="project-detail__tagline">{tagline}</p>
+        <div class="project-detail__tech">
+          {tech.map((t) => <span class="project-tech-tag">{t}</span>)}
+        </div>
+      </header>
+
+      <!-- Action buttons -->
+      <div class="project-detail__actions" data-animate="fade-up" data-delay="2">
+        {hasDocs && firstDoc && (
+          <a
+            href={getDocUrl(firstDoc.id, projectId)}
+            class="project-action project-action--primary"
+          >
+            <i class="fa-solid fa-book"></i>
+            Read Documentation
+          </a>
+        )}
+        {github && (
+          <a href={github} target="_blank" rel="noopener noreferrer" class="project-action project-action--outline">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        )}
+        {pypi && (
+          <a href={pypi} target="_blank" rel="noopener noreferrer" class="project-action project-action--outline">
+            <i class="fa-brands fa-python"></i> PyPI
+          </a>
+        )}
+        {npm && (
+          <a href={npm} target="_blank" rel="noopener noreferrer" class="project-action project-action--outline">
+            <i class="fa-brands fa-npm"></i> npm
+          </a>
+        )}
+      </div>
+
+      <!-- Markdown body -->
+      <div class="project-detail__body" data-animate="fade-up" data-delay="3">
+        <Content />
+      </div>
+
+      <!-- Docs quick-access grid -->
+      {hasDocs && projectDocs.length > 0 && (
+        <section class="project-docs-nav" data-animate="fade-up" data-delay="4">
+          <h2 class="project-docs-nav__title">
+            <i class="fa-solid fa-book-open"></i>
+            Documentation
+          </h2>
+          <div class="project-docs-nav__grid">
+            {projectDocs.map((doc) => (
+              <a href={getDocUrl(doc.id, projectId)} class="docs-card pulse-glow">
+                <div class="docs-card__content">
+                  <span class="docs-card__title">{doc.data.title}</span>
+                  {doc.data.description && (
+                    <span class="docs-card__desc">{doc.data.description}</span>
+                  )}
+                </div>
+                <i class="fa-solid fa-arrow-right docs-card__arrow"></i>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .project-detail__breadcrumb { margin-bottom: 2.5rem; }
+
+  .breadcrumb__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.35rem;
+    color: var(--color-subtitle);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .breadcrumb__back:hover { color: var(--secondary-color); }
+
+  .project-detail__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .project-detail__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .project-badge {
+    font-size: 1.15rem;
+    font-weight: 600;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2rem;
+  }
+
+  .project-featured {
+    font-size: 1.15rem;
+    color: #f59e0b;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .project-detail__name {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: var(--color-title);
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .project-detail__tagline {
+    font-size: 1.6rem;
+    color: var(--color-subtitle);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 54rem;
+  }
+
+  .project-detail__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .project-tech-tag {
+    font-size: 1.2rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.4rem;
+    background: rgba(0, 121, 208, 0.07);
+    color: var(--secondary-color);
+    border: 1px solid rgba(0, 121, 208, 0.15);
+  }
+
+  /* Actions */
+  .project-detail__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+
+  .project-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    border-radius: 0.7rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .project-action--primary {
+    background: var(--secondary-color);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 121, 208, 0.22);
+  }
+  .project-action--primary:hover {
+    background: #005a9e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 121, 208, 0.32);
+  }
+
+  .project-action--outline {
+    border: 1.5px solid var(--secondary-color);
+    color: var(--secondary-color);
+  }
+  .project-action--outline:hover {
+    background: var(--secondary-color);
+    color: #fff;
+  }
+
+  /* Markdown body inside BaseLayout (inherits the portfolio background) */
+  .project-detail__body :global(h2) {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  .project-detail__body :global(h3) {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+  }
+  .project-detail__body :global(p) {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: 1.4rem;
+  }
+  .project-detail__body :global(code) {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 1.2rem;
+    background: rgba(0, 121, 208, 0.07);
+    color: var(--secondary-color);
+    padding: 0.15em 0.45em;
+    border-radius: 0.3rem;
+  }
+  .project-detail__body :global(ul), .project-detail__body :global(ol) {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    padding-left: 2rem;
+    margin-bottom: 1.4rem;
+  }
+  .project-detail__body :global(a) {
+    color: var(--secondary-color);
+    text-decoration: underline;
+  }
+
+  /* Docs nav section */
+  .project-docs-nav {
+    margin-top: 4.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e5e6e7;
+  }
+
+  .project-docs-nav__title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .project-docs-nav__title i { color: var(--secondary-color); }
+
+  .project-docs-nav__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  .docs-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.8rem 2rem;
+    border: 1.5px solid #e5e6e7;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.4s, transform 0.3s;
+  }
+  .docs-card:hover { border-color: var(--secondary-color); }
+
+  .docs-card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .docs-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-title);
+  }
+
+  .docs-card__desc {
+    font-size: 1.3rem;
+    color: var(--color-subtitle);
+    line-height: 1.45;
+  }
+
+  .docs-card__arrow {
+    color: var(--color-subtitle);
+    font-size: 1.4rem;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+  .docs-card:hover .docs-card__arrow {
+    opacity: 1;
+    transform: translateX(3px);
+    color: var(--secondary-color);
+  }
+</style>
