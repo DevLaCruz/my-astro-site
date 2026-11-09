@@ -1,6 +1,7 @@
 # AGENTS.md — Documentation & Context for AI Agents
 > **Project:** `devlacruz.tech` (Astro Technical Dossier & Research Portfolio)  
-> **Workspace Path:** `/mnt/Datos/DjangoProjects/profile/astro-site/`  
+> **Old Workspace Path:** `/mnt/Datos/DjangoProjects/profile/astro-site/`
+> **Current Workspace Path:** `/mnt/Datos/NodejsProjects/astro-site`  
 > **Repository:** `git@github.com:DevLaCruz/my-astro-site.git`  
 > **Author:** Alejandro Antony De la Cruz Suárez  
 > **Professional Identity:** Systems Engineer & AI Infrastructure Builder (ORCID: `0009-0009-7303-685X`)  
