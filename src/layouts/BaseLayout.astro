@@ -127,7 +127,7 @@ const { title, activePage = "" } = Astro.props;
                             <li class="social__option">
                                 <a
                                     class="social__link"
-                                    href="https://github.com/alejandrodelacruzmora"
+                                    href="https://github.com/devlacruz"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="GitHub"
@@ -159,11 +159,20 @@ const { title, activePage = "" } = Astro.props;
                 </section>
             </aside>
 
+            <!-- Backdrop for Mobile Drawer -->
+            <div class="layout__backdrop" id="layout-backdrop" aria-hidden="true"></div>
+
             <!-- Mobile Menu Toggle -->
-            <div class="layout__menu-toggle">
+            <button
+                class="layout__menu-toggle"
+                id="layout-menu-toggle"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                type="button"
+            >
                 <i class="menu-toggle__icon fa-solid fa-bars"></i>
                 <i class="menu-toggle__icon fa-solid fa-xmark"></i>
-            </div>
+            </button>
 
             <!-- Main Content -->
             <slot />
@@ -197,39 +206,50 @@ const { title, activePage = "" } = Astro.props;
                     observer.observe(el);
                 });
 
-                // Mobile menu toggle
-                const menuToggle = document.querySelector(
-                    ".layout__menu-toggle",
-                );
+                // Mobile menu controller
+                const menuToggle = document.querySelector(".layout__menu-toggle");
                 const aside = document.querySelector(".layout__aside");
-                if (
-                    menuToggle &&
-                    aside &&
-                    !menuToggle.hasAttribute("data-bound")
-                ) {
+                const backdrop = document.querySelector(".layout__backdrop");
+
+                if (menuToggle && aside && !menuToggle.hasAttribute("data-bound")) {
                     menuToggle.setAttribute("data-bound", "true");
-                    menuToggle.addEventListener("click", () => {
-                        aside.classList.toggle("layout__aside--visible");
-                        aside.classList.toggle("layout__aside--hidden");
-                        const bars = menuToggle.querySelector(
-                            ".fa-bars",
-                        ) as HTMLElement;
-                        const xmark = menuToggle.querySelector(
-                            ".fa-xmark",
-                        ) as HTMLElement;
-                        if (bars && xmark) {
-                            if (
-                                aside.classList.contains(
-                                    "layout__aside--visible",
-                                )
-                            ) {
-                                bars.style.opacity = "0";
-                                xmark.style.opacity = "1";
-                            } else {
-                                bars.style.opacity = "1";
-                                xmark.style.opacity = "0";
-                            }
+
+                    const closeMenu = () => {
+                        aside.classList.remove("layout__aside--visible");
+                        backdrop?.classList.remove("is-visible");
+                        menuToggle.classList.remove("is-open");
+                        menuToggle.setAttribute("aria-expanded", "false");
+                    };
+
+                    const openMenu = () => {
+                        aside.classList.add("layout__aside--visible");
+                        backdrop?.classList.add("is-visible");
+                        menuToggle.classList.add("is-open");
+                        menuToggle.setAttribute("aria-expanded", "true");
+                    };
+
+                    menuToggle.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        if (aside.classList.contains("layout__aside--visible")) {
+                            closeMenu();
+                        } else {
+                            openMenu();
                         }
+                    });
+
+                    // Close on backdrop tap
+                    backdrop?.addEventListener("click", closeMenu);
+
+                    // Close on Escape key
+                    document.addEventListener("keydown", (e) => {
+                        if (e.key === "Escape" && aside.classList.contains("layout__aside--visible")) {
+                            closeMenu();
+                        }
+                    });
+
+                    // Close menu when navigating via aside links
+                    aside.querySelectorAll(".menu__link, .user-info__btn").forEach((link) => {
+                        link.addEventListener("click", closeMenu);
                     });
                 }
             });
