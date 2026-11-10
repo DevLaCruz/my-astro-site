@@ -126,6 +126,19 @@ const s = statusConfig[status];
 </BaseLayout>
 
 <style>
+  .project-detail {
+    height: 100%;
+    min-height: 100%;
+    padding: 5rem 6rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 0 4rem 4rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-scrollbar, #d3d3d4) transparent;
+  }
+
   .project-detail__breadcrumb { margin-bottom: 2.5rem; }
 
   .breadcrumb__back {

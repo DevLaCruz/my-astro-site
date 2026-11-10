@@ -111,11 +111,15 @@ const { prev, next } = getAdjacentDocs(docs, doc.id);
       /* ─── Reset & base ─── */
       *, *::before, *::after { box-sizing: border-box; }
 
+      html {
+        font-size: 62.5%; /* 1rem = 10px */
+      }
+
       body {
         margin: 0;
         padding: 0;
         font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 62.5%;  /* 1rem = 10px */
+        font-size: 1.5rem;
         background: #fff;
         color: #374151;
       }
@@ -200,6 +204,11 @@ const { prev, next } = getAdjacentDocs(docs, doc.id);
       }
 
       /* ─── Article ─── */
+      .docs-article {
+        max-width: 86rem;
+        margin: 0 auto;
+      }
+
       .docs-article__header {
         padding-bottom: 2.5rem;
         margin-bottom: 3.5rem;
